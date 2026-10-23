@@ -272,6 +272,11 @@ const server = http.createServer(async (request, response) => {
   if (!filePath.startsWith(root + path.sep)) { response.writeHead(403); response.end('Forbidden'); return; }
   fs.readFile(filePath, (error, body) => {
     if (error) { response.writeHead(404); response.end('Not found'); return; }
+    if (filePath === path.join(root, 'index.html') && process.env.CLOUDFLARE_WEB_ANALYTICS_TOKEN) {
+      const token = JSON.stringify({ token:process.env.CLOUDFLARE_WEB_ANALYTICS_TOKEN });
+      const beacon = `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='${token}'></script>`;
+      body = Buffer.from(body.toString('utf8').replace('<!-- ANALYTICS_BEACON -->', beacon));
+    }
     response.writeHead(200, { 'Content-Type':mime[path.extname(filePath)] || 'application/octet-stream', 'Cache-Control':'no-store' });
     response.end(body);
   });

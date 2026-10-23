@@ -7,3 +7,6 @@ services:
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /healthz
+    envVars:
+      - key: CLOUDFLARE_WEB_ANALYTICS_TOKEN
+        sync: false
