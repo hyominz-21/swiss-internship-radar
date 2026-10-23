@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: swiss-internship-radar
+    runtime: node
+    region: frankfurt
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz

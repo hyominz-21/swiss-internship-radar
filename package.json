@@ -1,0 +1,12 @@
+{
+  "name": "swiss-intern-job",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Live Swiss internship discovery board for UN, IGO and NGO employers",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
